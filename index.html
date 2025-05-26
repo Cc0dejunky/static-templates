@@ -330,7 +330,7 @@
             <img src="Mini-Course/assets/mci.png" alt="Mini course Preview" class="preview">
             <h2>Project Chimera</h2>
             <p>A sleek, futuristic dashboard interface with holographic elements and data stream visualizations. Perfect for sci-fi game UIs or advanced analytics platforms.</p>
-            <a href="assets/mci.png" class="btn">View Details</a>
+           <button onclick="window.location.href='Mini-Course/index.html';" class="btn"View Demo</button>
         </article>
 <!--  
         <article class="template-card">
@@ -356,6 +356,25 @@
         <p>&copy; 2025 Your Name/Brand - All Rights Reserved</p>
         <p>Powered by c0dene0n Energy</p>
     </footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the button by its ID
+    const miniCourseButton = document.getElementById('miniCourseBtnActual');
 
+    // Check if the button exists
+    if (miniCourseButton) {
+        // Add a click event listener
+        miniCourseButton.addEventListener('click', function() {
+            // Define the URL to navigate to
+            const targetUrl = 'Mini-Course/index.html'; // Hardcode or get from a data attribute
+
+            // Navigate to the new page
+            window.location.href = targetUrl;
+        });
+    } else {
+        console.error('Button with ID "miniCourseBtnActual" not found.');
+    }
+});
+</script>
 </body>
 </html>
