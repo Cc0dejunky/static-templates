@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>c0dene0n Templates</title>
+    <style>
+        :root {
+            --neon-pink: #ff00ff; /* Sharp Neon Pink */
+            --neon-aqua: #00ffff; /* Neon Aqua */
+            --teal-dark: #008080; /* Teal for details */
+            --background-color: #ffffff; /* Dark background for contrast */
+            --text-color: #e0e0e0; /* Light grey for general text */
+            --glow-shadow-pink: 0 0 5px var(--neon-pink),
+                               0 0 10px var(--neon-pink),
+                               0 0 20px var(--neon-pink),
+                               0 0 40px var(--neon-pink),
+                               0 0 80px var(--neon-pink);
+            --glow-shadow-aqua: 0 0 5px var(--neon-aqua),
+                                0 0 10px var(--neon-aqua),
+                                0 0 20px var(--neon-aqua),
+                                0 0 40px var(--neon-aqua),
+                                0 0 80px var(--neon-aqua);
+            --teal-glow-shadow: 0 0 3px var(--teal-dark),
+                                 0 0 6px var(--teal-dark),
+                                 0 0 10px var(--teal-dark);
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-image:
+                /* Teal Motherboard Lines - Top Layer (Subtle) */
+                linear-gradient(45deg, var(--teal-dark) 1px, transparent 1px),
+                linear-gradient(-45deg, var(--teal-dark) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 128, 128, 0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(0, 128, 128, 0.1) 1px, transparent 1px),
+                /* Darker Grid for Depth */
+                linear-gradient(45deg, rgba(0, 50, 50, 0.3) 2px, transparent 2px),
+                linear-gradient(-45deg, rgba(0, 50, 50, 0.3) 2px, transparent 2px);
+            background-size:
+                20px 20px, /* Teal lines */
+                20px 20px,
+                40px 40px, /* Grid lines */
+                40px 40px,
+                80px 80px, /* Darker grid */
+                80px 80px;
+            background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+            overflow-x: hidden; /* Prevent horizontal scroll from glows */
+        }
+
+        .header-container {
+             color: white;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(10, 10, 35, 0.95) 0%, rgba(10, 10, 35, 0.8) 80%, transparent 100%);
+            border-bottom: 2px solid var(--neon-aqua);
+            box-shadow: 0 0 15px var(--neon-aqua);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-container::before,
+        .header-container::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background-color: var(--neon-pink);
+            box-shadow: var(--glow-shadow-pink);
+            animation: flicker 2s infinite alternate;
+        }
+
+        .header-container::before {
+            top: 10px;
+            left: 20px;
+            transform: skewX(-30deg);
+        }
+
+        .header-container::after {
+            bottom: 10px;
+            right: 20px;
+            transform: skewX(30deg);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: white;
+            text-shadow: var(--glow-shadow-pink), 0 0 2px #000;
+            margin: 0;
+            letter-spacing: 2px;
+            animation: pulseText 2s infinite alternate;
+        }
+
+        .sub-header {
+            font-size: 1.2em;
+            color: white;
+            text-shadow: var(--glow-shadow-aqua);
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+            z-index: 5;
+        }
+
+        .template-card {
+            background-color: rgba(25, 4, 50, 0.781); /* Dark translucent base */
+            border: 2px solid var(--neon-aqua);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden; /* To contain pseudo-elements */
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3), inset 0 0 5px rgba(0, 255, 255, 0.2);
+        }
+
+        .template-card::before,
+        .template-card::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--neon-pink);
+            box-shadow: var(--glow-shadow-pink);
+            transition: width 0.4s ease-out;
+        }
+
+        .template-card::before {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .template-card::after {
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .template-card:hover::before,
+        .template-card:hover::after {
+            width: 100%;
+        }
+
+        .template-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 0 20px var(--neon-aqua),
+                        0 0 40px var(--neon-aqua),
+                        inset 0 0 10px rgba(0, 255, 255, 0.4);
+        }
+
+        .template-card img.preview {
+            width: 100%;
+            height: 180px; /* Adjust as needed */
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid var(--teal-dark);
+            box-shadow: 0 0 8px var(--teal-dark);
+        }
+
+        .template-card h2 {
+            font-size: 1.8em;
+            color: var(--neon-pink);
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        .template-card p {
+            font-size: 0.9em;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .template-card .tags {
+            margin-bottom: 20px;
+        }
+
+        .template-card .tags span {
+            background-color: var(--teal-dark);
+            color: var(--background-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin: 0 5px;
+            box-shadow: var(--teal-glow-shadow);
+        }
+
+        .template-card .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--neon-aqua);
+            border: 2px solid var(--neon-aqua);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            text-shadow: 0 0 3px var(--neon-aqua);
+        }
+
+        .template-card .btn:hover {
+            background-color: var(--neon-aqua);
+            color: var(--background-color);
+            box-shadow: var(--glow-shadow-aqua);
+        }
+
+        /* Corner accents for cards */
+        .template-card .corner-tl, .template-card .corner-tr,
+        .template-card .corner-bl, .template-card .corner-br {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-color: var(--neon-pink);
+            border-style: solid;
+            transition: all 0.3s ease;
+        }
+        .template-card .corner-tl { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+        .template-card .corner-tr { top: -2px; right: -2px; border-width: 2px 2px 0 0; }
+        .template-card .corner-bl { bottom: -2px; left: -2px; border-width: 0 0 2px 2px; }
+        .template-card .corner-br { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+
+        .template-card:hover .corner-tl, .template-card:hover .corner-tr,
+        .template-card:hover .corner-bl, .template-card:hover .corner-br {
+            width: 25px;
+            height: 25px;
+            border-color: var(--neon-aqua);
+            box-shadow: var(--glow-shadow-aqua);
+        }
+
+
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto; /* Pushes footer to the bottom */
+            background: linear-gradient(to top, rgba(10, 10, 35, 0.95) 0%, rgba(10, 10, 35, 0.8) 80%, transparent 100%);
+            border-top: 1px solid var(--teal-dark);
+            box-shadow: 0 0 10px var(--teal-dark);
+            font-size: 0.9em;
+            color: var(--teal-dark);
+            z-index: 10;
+        }
+
+        /* Animations */
+        @keyframes pulseText {
+            0% { text-shadow: var(--glow-shadow-pink), 0 0 2px #000; opacity: 0.8; }
+            50% { text-shadow: 0 0 7px var(--neon-pink),
+                               0 0 15px var(--neon-pink),
+                               0 0 25px var(--neon-pink),
+                               0 0 50px var(--neon-pink),
+                               0 0 90px var(--neon-pink), 0 0 2px #000; opacity: 1; }
+            100% { text-shadow: var(--glow-shadow-pink), 0 0 2px #000; opacity: 0.8; }
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                box-shadow: var(--glow-shadow-pink), 0 0 1px #000;
+                opacity: 0.7;
+            }
+            20%, 24%, 55% {
+                box-shadow: var(--glow-shadow-pink), 0 0 1px #000;
+                opacity: 1;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .sub-header {
+                font-size: 1em;
+            }
+            .templates-grid {
+                grid-template-columns: 1fr; /* Single column on smaller screens */
+                padding: 15px;
+            }
+            .template-card {
+                padding: 15px;
+            }
+            .template-card h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                 color: white;
+                font-size: 2em;
+            }
+            .header-container::before,
+            .header-container::after {
+                width: 60px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>c0dene0n_Templates</h1>
+        <p class="sub-header">Your Gateway to Cyber-Enhanced Designs</p>
+    </div>
+
+    <main class="templates-grid">
+        <article class="template-card">
+            <div class="corner-tl"></div><div class="corner-tr"></div>
+            <div class="corner-bl"></div><div class="corner-br"></div>
+            <img src="Mini-Course/assets/mci.png" alt="Mini course Preview" class="preview">
+            <h2>Project Chimera</h2>
+            <p>A sleek, futuristic dashboard interface with holographic elements and data stream visualizations. Perfect for sci-fi game UIs or advanced analytics platforms.</p>
+            <a href="assets/mci.png" class="btn">View Details</a>
+        </article>
+<!--  
+        <article class="template-card">
+            <div class="corner-tl"></div><div class="corner-tr"></div>
+            <div class="corner-bl"></div><div class="corner-br"></div>
+            <img src="https://via.placeholder.com/400x200/0a0a23/00FFFF?text=Template+Beta" alt="Template Beta Preview" class="preview">
+            <h2>GlitchCore Portfolio</h2>
+            <p>An edgy, glitch-art inspired portfolio template designed for digital artists and developers. Features dynamic text effects and cyberpunk aesthetics.</p>
+            <a href="#" class="btn">View Details</a>
+        </article>
+
+        <article class="template-card">
+            <div class="corner-tl"></div><div class="corner-tr"></div>
+            <div class="corner-bl"></div><div class="corner-br"></div>
+            <img src="https://via.placeholder.com/400x200/008080/E0E0E0?text=Template+Gamma" alt="Template Gamma Preview" class="preview">
+            <h2>Neon Grid System</h2>
+            <a href="#" class="btn">View Details</a>
+        </article>
+-->
+        </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Your Name/Brand - All Rights Reserved</p>
+        <p>Powered by c0dene0n Energy</p>
+    </footer>
+
+</body>
+</html>
